@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Portafolio - Yony{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fuente moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="body">
+<header class="header">
+    <div class="container header-content">
+        <div class="brand">
+            <span class="brand-logo">YM</span>
+            <div class="brand-text">
+                <span class="brand-name">Yohanny Martínez</span>
+                <span class="brand-role">Informático · Desarrollador</span>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="#proyectos">Proyectos</a>
+            <a href="#skills">Skills</a>
+            <a href="#sobre-mi">Sobre mí</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <span>© {% now "Y" %} Yohanny Martínez</span>
+        <span>Desarrollado con Django · Deploy en PythonAnywhere</span>
+    </div>
+</footer>
+</body>
+</html>

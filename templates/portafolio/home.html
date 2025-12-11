@@ -1,0 +1,168 @@
+{% extends "portafolio/base.html" %}
+{% block title %}Portafolio · Yohanny Martínez{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <p class="hero-badge">Disponible para proyectos freelance · remoto</p>
+            <h1 class="hero-title">
+                Construyo <span>aplicaciones web</span> completas, limpias y mantenibles.
+            </h1>
+            <p class="hero-subtitle">
+                Soy informático con experiencia en Python y Django. Diseño y desarrollo desde el backend 
+                hasta el frontend: APIs robustas, paneles de administración personalizados y flujos 
+                que automatizan procesos de negocio.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+                <a href="#contacto" class="btn btn-ghost">Contáctame</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <h2>Stack principal</h2>
+            <ul class="stack-list">
+                <li>Python · Django · DRF</li>
+                <li>PostgreSQL · MySQL · SQLite</li>
+                <li>HTML · CSS · JS</li>
+                <li>Git · GitHub · CI/CD</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="proyectos" class="section">
+    <div class="container section-header">
+        <h2>Proyectos destacados</h2>
+        <p>Algunos trabajos que representan mejor lo que hago.</p>
+    </div>
+
+    <div class="container cards-grid">
+        {% for project in featured_projects %}
+            <article class="card project-card">
+                {% if project.image %}
+                    <div class="card-image">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    </div>
+                {% endif %}
+                <div class="card-body">
+                    <h3>{{ project.title }}</h3>
+                    <p class="card-description">{{ project.short_description }}</p>
+                    <p class="card-tech">{{ project.tech_stack }}</p>
+                    <div class="card-actions">
+                        <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-sm">Ver detalles</a>
+                        {% if project.repo_url %}
+                            <a href="{{ project.repo_url }}" target="_blank" class="link-muted">Repositorio</a>
+                        {% endif %}
+                        {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank" class="link-muted">Demo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <p class="container">Aún no hay proyectos destacados. Agrégalos desde el admin.</p>
+        {% endfor %}
+    </div>
+
+    {% if projects %}
+    <div class="container section-subheader">
+        <h3>Otros proyectos</h3>
+    </div>
+    <div class="container cards-grid cards-grid-sm">
+        {% for project in projects %}
+            <article class="card project-card project-card-simple">
+                <div class="card-body">
+                    <h3>{{ project.title }}</h3>
+                    <p class="card-description">{{ project.short_description }}</p>
+                    <p class="card-tech">{{ project.tech_stack }}</p>
+                    <a href="{% url 'portfolio:project_detail' project.slug %}" class="link-muted">Ver más →</a>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+
+<section id="skills" class="section section-alt">
+    <div class="container section-header">
+        <h2>Skills</h2>
+        <p>Las tecnologías con las que trabajo día a día.</p>
+    </div>
+
+    <div class="container skills-grid">
+        {% for skill in skills %}
+            <div class="skill-pill">
+                <span class="skill-name">{{ skill.name }}</span>
+                <span class="skill-meta">{{ skill.category }} · {{ skill.get_level_display }}</span>
+            </div>
+        {% empty %}
+            <p>Aún no has agregado skills. Hazlo desde el admin.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="sobre-mi" class="section">
+    <div class="container about-grid">
+        <div>
+            <h2>Sobre mí</h2>
+            <p>
+                Soy informático y desarrollador de software con foco en el desarrollo backend con
+                <strong>Python</strong> y <strong>Django</strong>, pero con experiencia full stack.
+                Me gusta diseñar soluciones simples pero escalables, escribir código limpio y
+                mantenible, y trabajar usando buenas prácticas de control de versiones y despliegue.
+            </p>
+            <p>
+                Tengo experiencia construyendo aplicaciones web completas, desde el levantamiento de
+                requerimientos hasta la puesta en producción. Uno de mis proyectos más relevantes es
+                un sistema de postulaciones laborales, con backend en Python, Django, MySQL y APIs REST,
+                y un frontend desarrollado en HTML5, CSS, Bootstrap, JavaScript y jQuery.
+            </p>
+            <p>
+                Me interesa especialmente la automatización de procesos, el diseño de APIs REST y la
+                integración de sistemas. Disfruto liderar proyectos, trabajar bajo presión cuando es
+                necesario y seguir aprendiendo nuevas tecnologías de forma constante.
+            </p>
+        </div>
+        <div class="about-card">
+            <h3>Lo que puedo aportar</h3>
+            <ul>
+                <li>Desarrollo de aplicaciones web y APIs REST con Python, Django y DRF.</li>
+                <li>Diseño de bases de datos relacionales e integración con MySQL/PostgreSQL.</li>
+                <li>Despliegues en la nube (por ejemplo, PythonAnywhere) y automatización básica.</li>
+                <li>Gestión de código con Git, GitHub y GitLab, trabajo colaborativo y revisión de código.</li>
+                <li>Liderazgo técnico en proyectos de principio a fin y comunicación clara con el cliente.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section id="contacto" class="section section-alt">
+    <div class="container contact-grid">
+        <div>
+            <h2>Contacto</h2>
+            <p>
+                ¿Te interesa trabajar conmigo o tienes alguna idea de proyecto?
+                Escríbeme y lo conversamos.
+            </p>
+        </div>
+        <div class="contact-card">
+            <p><strong>Email:</strong> <a href="mailto:yonyx.m.p@gmail.com">yonyx.m.p@gmail.com</a></p>
+            <p>
+                <strong>LinkedIn :</strong>
+                <a href="https://www.linkedin.com/in/yohanny-martinez-aa9126195/" target="_blank" rel="noopener">
+                    LinkedIn
+                </a>
+                ·
+                <!-- <a href="https://github.com/tu-usuario" target="_blank" rel="noopener">
+                    GitHub
+                </a> -->
+            </p>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

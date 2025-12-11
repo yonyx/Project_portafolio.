@@ -1,0 +1,39 @@
+{% extends "portafolio/base.html" %}
+{% block title %}{{ project.title }} · Portafolio{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container project-detail">
+        <a href="{% url 'portfolio:home' %}" class="link-muted">← Volver al inicio</a>
+
+        <h1 class="project-title">{{ project.title }}</h1>
+        <p class="project-meta">
+            {{ project.tech_stack }} · {{ project.created_at }}
+        </p>
+
+        <div class="project-layout">
+            <div class="project-main">
+                {% if project.image %}
+                    <div class="project-image">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    </div>
+                {% endif %}
+                <div class="project-description">
+                    <p>{{ project.description|linebreaks }}</p>
+                </div>
+            </div>
+            <aside class="project-sidebar">
+                <h3>Enlaces</h3>
+                <ul>
+                    {% if project.repo_url %}
+                        <li><a href="{{ project.repo_url }}" target="_blank">Repositorio</a></li>
+                    {% endif %}
+                    {% if project.live_url %}
+                        <li><a href="{{ project.live_url }}" target="_blank">Demo en vivo</a></li>
+                    {% endif %}
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
